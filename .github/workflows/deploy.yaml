@@ -1,0 +1,26 @@
+name: Deploy CI/CD to Server
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing deploy to server using remote ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd roosen
+            git pull origin main
+            sudo docker stop roosen_laravel.test_1
+            sudo docker rm roosen_laravel.test_1
+            sudo docker rmi sail-8.1/app:latest
+            sudo docker build -t sail-8.1/app:latest .
+            sudo docker run -d -p 2131:2131 --name roosen_laravel.test_1 sail-8.1/app:latest
