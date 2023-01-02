@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+Route::get('/index', function () {
+    return view('index');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+route::get('user/profile/{user}',[UserController::class,'profile']);
+route::get('user/setting/{user}',[UserController::class,'setting']);
+route::post('user/update/{user}',[UserController::class,'settingUpdate'])->name('user.update');
