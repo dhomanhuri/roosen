@@ -19,8 +19,5 @@ jobs:
           script: |
             cd /home/ilyas/roosen
             git pull origin main
-            sudo docker stop roosen_laravel.test_1
-            sudo docker rm roosen_laravel.test_1
-            sudo docker rmi sail-8.1/app:latest
-            sudo docker build -t sail-8.1/app:latest .
-            sudo docker run -d -p 2131:2131 --name roosen_laravel.test_1 sail-8.1/app:latest
+            ./vendor/bin/sail stop
+            ./vendor/bin/sail up
