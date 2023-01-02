@@ -20,4 +20,4 @@ jobs:
             cd /home/ilyas/roosen
             git pull origin main
             ./vendor/bin/sail stop
-            ./vendor/bin/sail up
+            ./vendor/bin/sail up -d
