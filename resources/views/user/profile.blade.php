@@ -112,7 +112,7 @@
                                 <div class="buttons">
                                     
                                     <a class="btn btn-outline-success px-4" href="{{ url('home') }}">Back To Dashboard</a>
-                                    <a class="btn btn-successz px-4 ms-3" href="{{ url('user/setting/' . auth()->user()->id ) }}">Settings</a>
+                                    <a class="btn btn-success px-4 ms-3" href="{{ url('user/setting/' . auth()->user()->id ) }}">Settings</a>
                                 </div>
                                 
                                 

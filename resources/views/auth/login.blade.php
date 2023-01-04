@@ -22,6 +22,11 @@
 @section('main')
     <section class="vh-100">
         <div class="container-fluid h-custom">
+            @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    {!! \Session::get('success') !!}
+                </div>
+            @endif
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -35,7 +40,8 @@
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email Address">
+                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                                placeholder="Email Address">
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">

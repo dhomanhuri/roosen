@@ -1,0 +1,113 @@
+@extends('sbadmin.layout')
+
+@section('main')
+<style>
+    .formPetani {
+        transform: scale(0.85);
+    }
+</style>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <h5 class="text-success">Tambah Petani</h5>
+                @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                            {!! \Session::get('success') !!}
+                    </div>
+                @endif
+            </div>
+            <div class="col-lg-8 formPetani" id="formPetani">
+                <form action="{{ route('petani.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1" 
+                            name="name" required>
+                        @error('name')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1"
+                            name="email" required>
+
+                        @error('email')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Password</label>
+                        <input type="password" class="form-control form-control-sm" id="exampleFormControlInput1" name="password" required>
+
+                        @error('password')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Alamat Rumah</label>
+                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1" name="alamat_rumah" required>
+
+                        @error('alamat_rumah')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Alamat Lahan</label>
+                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1" name="alamat_lahan" required>
+
+                        @error('alamat_lahan')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Luas Lahan</label>
+                        <input type="number" class="form-control form-control-sm" id="exampleFormControlInput1" name="luas_lahan" required>
+
+                        @error('luas_lahan')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Jenis Tanaman</label>
+                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput1" name="jenis_tanaman" required>
+
+                        @error('jenis_tanaman')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Foto</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01" name="foto" required>
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+                    @error('foto')
+                        <div class="alert alert-danger" role="alert">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <button class="btn btn-success text-center btn-block" type="submit">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

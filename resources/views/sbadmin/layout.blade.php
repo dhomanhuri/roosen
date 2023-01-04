@@ -5,21 +5,20 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=1200, initial-scale=1" />
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>Roosen - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{  asset('sbadmin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('sbadmin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{  asset('sbadmin/css/sb-admin-2.min.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('sbadmin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -58,26 +57,43 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('user/profile/' . auth()->user()->id ) }}" 
+                <a class="nav-link collapsed" href="{{ url('user/profile/' . auth()->user()->id) }}"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-user"></i>
                     <span>Profile</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" 
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fab fa-product-hunt"></i>
-                    <span>Product</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-cart-plus"></i>
-                    <span>Keranjang</span>
-                </a>
-            </li>
+
+            @if ( auth()->user()->role == 'admin')
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ url('petani/create/') }}#formPetani"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-book"></i>
+                        <span>Pendaftaran Petani</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ url('/petani') }}" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fab fa-product-hunt"></i>
+                        <span>Daftar Petani</span>
+                    </a>
+                </li>
+            @endif
+
+            @if ( auth()->user()->role == 'pembeli')
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fab fa-product-hunt"></i>
+                        <span>Product</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-cart-plus"></i>
+                        <span>Keranjang</span>
+                    </a>
+                </li>
+            @endif
 
         </ul>
         <!-- End of Sidebar -->
@@ -89,7 +105,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-sm">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -97,42 +113,48 @@
                     </button>
 
                     <!-- Topbar Search -->
-                   
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                       
 
-                      
+
+
                         <!-- Nav Item - Messages -->
-                       
+
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ auth()->user()->foto == 'default.jpeg' ? asset('sbadmin/img/undraw_profile.svg') : asset('storage/' . auth()->user()->foto ) }}">
+                                    src="{{ auth()->user()->foto == 'default.jpeg' ? asset('sbadmin/img/undraw_profile.svg') : asset('storage/' . auth()->user()->foto) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{ url('user/profile/' . auth()->user()->id ) }}">
+                                <a class="dropdown-item" href="{{ url('user/profile/' . auth()->user()->id) }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="{{ url('user/setting/' . auth()->user()->id ) }}">
+                                <a class="dropdown-item" href="{{ url('user/setting/' . auth()->user()->id) }}">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
                                 <a class="dropdown-item" href="{{ url('/index') }}">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Index
                                 </a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#deleteAccountModal">
+                                    <i class="fas fa-trash fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Delete Account
+                                </a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -146,7 +168,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-               @yield('main')
+                @yield('main')
                 <!-- /.container-fluid -->
 
             </div>
@@ -184,7 +206,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Klik logout jika anda yakin ingin logout</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -196,22 +218,45 @@
         </div>
     </div>
 
+    {{-- Account delete modal  --}}
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yakin ingin menghapus akun??</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Klik hapus jika anda yakin ingin menghapus</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <form id="logout-form" action="{{ route('user.delete', auth()->user()->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
-    <script src="{{  asset('sbadmin/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{  asset('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{  asset('sbadmin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{  asset('sbadmin/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{  asset('sbadmin/vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{  asset('sbadmin/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{  asset('sbadmin/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('sbadmin/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('sbadmin/js/demo/chart-pie-demo.js') }}"></script>
 
 </body>
 

@@ -74,4 +74,13 @@ class UserController extends Controller
         return redirect('/user/setting/' . $id)->with('success', 'Profile berhasil di update');
 
     }
+
+
+    public function deleteUser($id){
+        $user = User::find($id);
+        Storage::delete($user->foto);
+        $user->delete();
+
+        return redirect('/login')->with('success','Akun anda berhasil dihapus');
+    }
 }
