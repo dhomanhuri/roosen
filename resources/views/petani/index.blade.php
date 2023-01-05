@@ -18,9 +18,9 @@
                     </div>
                 @endif
                 <div class="table-responsive rounded-top">
-                    <table class="table shadow-sm">
+                    <table class="table shadow-sm display-5">
                         <thead>
-                            <tr class="table-success text-dark">
+                            <tr class="text-light bg-success ">
                                 <th scope="col">No</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
@@ -56,6 +56,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $petani->links() }}
                 </div>
             </div>
         </div>
