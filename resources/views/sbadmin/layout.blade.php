@@ -64,23 +64,24 @@
                 </a>
             </li>
 
-            @if ( auth()->user()->role == 'admin')
+            @if (auth()->user()->role == 'admin')
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ url('petani/create/') }}#formPetani"
-                        aria-expanded="true" aria-controls="collapseTwo">
+                    <a class="nav-link collapsed" href="{{ url('petani/create/') }}#formPetani" aria-expanded="true"
+                        aria-controls="collapseTwo">
                         <i class="fas fa-book"></i>
                         <span>Pendaftaran Petani</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ url('/petani') }}" aria-expanded="true" aria-controls="collapseTwo">
+                    <a class="nav-link collapsed" href="{{ url('/petani') }}" aria-expanded="true"
+                        aria-controls="collapseTwo">
                         <i class="fab fa-product-hunt"></i>
                         <span>Daftar Petani</span>
                     </a>
                 </li>
             @endif
 
-            @if ( auth()->user()->role == 'pembeli')
+            @if (auth()->user()->role == 'pembeli')
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fab fa-product-hunt"></i>
@@ -131,7 +132,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
-                                <img class="img-profile rounded-circle"
+                                <img class="img-profile rounded-circle shadow-lg"
                                     src="{{ auth()->user()->foto == 'default.jpeg' ? asset('sbadmin/img/undraw_profile.svg') : asset('storage/' . auth()->user()->foto) }}">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -155,7 +156,8 @@
                                     <i class="fas fa-trash fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Delete Account
                                 </a>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -240,6 +242,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const fullPath = document.querySelector('.upload');
+        let path = document.querySelector('.path');
+
+       fullPath.addEventListener('change',function(){
+            path.innerHTML = fullPath.value;
+       });
+
+
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('sbadmin/vendor/jquery/jquery.min.js') }}"></script>

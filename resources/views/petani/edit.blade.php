@@ -92,12 +92,13 @@
                         @enderror
                     </div>
                     <img src="{{ asset('storage/'.$petani->foto) }}" alt="" width="200" class="img-thumbnail text-center mb-2 shadow-sm">
+                    <p>Path : <span class="path"></span></p>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupFileAddon01">Foto</span>
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                            <input type="file" class="custom-file-input upload" id="inputGroupFile01"
                                 aria-describedby="inputGroupFileAddon01" name="foto" >
                             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                         </div>

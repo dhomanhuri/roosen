@@ -96,7 +96,7 @@
                         <div class="card p-3 py-4 border shadow-lg  ">
                             
                             <div class="text-center">
-                                <img src="{{ auth()->user()->foto == 'default.jpeg' ? asset('sbadmin/img/undraw_profile.svg') : asset('storage/' . auth()->user()->foto ) }}" width="200" class="rounded">
+                                <img src="{{ auth()->user()->foto == 'default.jpeg' ? asset('sbadmin/img/undraw_profile.svg') : asset('storage/' . auth()->user()->foto ) }}" width="200" class="rounded shadow-lg img-thumbnail">
                             </div>
                             
                             <div class="text-center mt-3">
