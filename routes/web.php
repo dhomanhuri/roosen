@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\NpkController;
+use App\Http\Controllers\PenyiramanController;
 use App\Http\Controllers\PetaniController;
+use App\Http\Controllers\PhTanahController;
 use App\Http\Controllers\UserController;
+use App\Models\HasilProduksi;
+use App\Models\Pemupukan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +41,10 @@ route::post('user/delete/{user}',[UserController::class,'deleteUser'])->name('us
 
 // Petani Routes
 route::resource('/petani',PetaniController::class);
+
+// Lahan Routes
+route::resource('/npk',NpkController::class);
+route::resource('/phtanah',PhTanahController::class);
+route::resource('/penyiraman',PenyiramanController::class);
+route::resource('/pemupukan',Pemupukan::class);
+route::resource('/hasilproduksi',HasilProduksi::class);

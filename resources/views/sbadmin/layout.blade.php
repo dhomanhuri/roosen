@@ -64,6 +64,34 @@
                 </a>
             </li>
 
+            @if ( auth()->user()->role == 'petani')
+             <!-- Nav Item - Utilities Collapse Menu -->
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-campground"></i>
+                    <span>Lahan</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Kelola Lahan</h6>
+                        <a class="collapse-item" href="{{ url('/npk') }}">NPK</a>
+                        <a class="collapse-item" href="utilities-border.html">PH TANAH</a>
+                        <a class="collapse-item" href="utilities-animation.html">Penyiraman</a>
+                        <a class="collapse-item" href="utilities-other.html">Pemupukan</a>
+                        <a class="collapse-item" href="utilities-other.html">Hasil Produksi</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fab fa-product-hunt"></i>
+                    <span>My Product</span>
+                </a>
+            </li>
+            @endif
+
             @if (auth()->user()->role == 'admin')
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ url('petani/create/') }}#formPetani" aria-expanded="true"
@@ -219,6 +247,8 @@
             </div>
         </div>
     </div>
+
+    
 
     {{-- Account delete modal  --}}
     <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog"
