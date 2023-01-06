@@ -15,6 +15,8 @@ class PenyiramanController extends Controller
     public function index()
     {
         //
+        $penyiraman = Penyiraman::where('user_id',auth()->user()->id)->paginate(10);
+        return view('lahan.penyiraman',compact('penyiraman'));
     }
 
     /**
@@ -25,6 +27,7 @@ class PenyiramanController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -36,6 +39,19 @@ class PenyiramanController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'tanggal' => 'required',
+            'volume' => 'required',
+        ]);
+
+
+        Penyiraman::create([
+            'user_id' => auth()->user()->id,
+            'tanggal' => $request->tanggal,
+            'volume' => $request->volume,
+        ]);
+
+        return redirect('/penyiraman')->with('success','berhasil menambahkan data');
     }
 
     /**
@@ -58,6 +74,12 @@ class PenyiramanController extends Controller
     public function edit(Penyiraman $penyiraman)
     {
         //
+        $penyiramanEdit = $penyiraman;
+        if ( $penyiramanEdit->user_id !== auth()->user()->id ){
+            return redirect('/penyiraman');
+        }
+        $penyiraman = Penyiraman::where('user_id',auth()->user()->id)->paginate(10);
+        return view('lahan.penyiraman',compact('penyiramanEdit','penyiraman'));
     }
 
     /**
@@ -70,6 +92,19 @@ class PenyiramanController extends Controller
     public function update(Request $request, Penyiraman $penyiraman)
     {
         //
+        $request->validate([
+            'tanggal' => 'required',
+            'volume' => 'required',
+        ]);
+
+
+        $penyiraman->update([
+            'user_id' => auth()->user()->id,
+            'tanggal' => $request->tanggal,
+            'volume' => $request->volume,
+        ]);
+
+        return redirect('/penyiraman')->with('success','berhasil edit data');
     }
 
     /**
@@ -81,5 +116,7 @@ class PenyiramanController extends Controller
     public function destroy(Penyiraman $penyiraman)
     {
         //
+        $penyiraman->delete();
+        return redirect('/penyiraman')->with('success','berhasil menghapus data');
     }
 }

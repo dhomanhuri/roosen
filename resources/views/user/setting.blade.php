@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-12 d-flex justify-content-center">
-                <h1 class="text-success">Settings</h1>
+                <h1 class="text-danger">Settings</h1>
             </div>
             <div class="col-lg-12">
                 @if (\Session::has('success'))
@@ -63,7 +63,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <button class="btn btn-success text-center btn-block" type="submit">Update</button>
+                    <button class="btn btn-danger text-center btn-block" type="submit">Update</button>
                 </form>
             </div>
         </div>

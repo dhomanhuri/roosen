@@ -14,60 +14,60 @@
     </style>
     <div class="container-fluid">
         <div class="card">
-            <div class="card-header text-center">NPK</div>
+            <div class="card-header text-center">Hasil Produksi</div>
             <div class="card-body">
-                @if ( isset($npkEdit) )
-                    <form action="{{ route('npk.update',$npkEdit->id) }}" method="POST">
+                @if ( isset($hasilProduksiEdit) )
+                    <form action="{{ route('hasilproduksi.update',$hasilProduksiEdit->id) }}" method="POST">
                         @method('put')
                 @else 
-                    <form action="{{ route('npk.store') }}" method="POST">
+                    <form action="{{ route('hasilproduksi.store') }}" method="POST">
                 @endif
                     @csrf
                     <div class="col-lg-12 formInput justify-content-center">
                         <div class="mb-3" style="margin-right: 7px;">
-                            <label for="exampleFormControlInput1" class="form-label">Tanggal : </label>
-                            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="tanggal"
-                                name="tanggal"
-                                @isset($npkEdit)
-                                value="{{ $npkEdit->tanggal }}"
+                            <label for="exampleFormControlInput1" class="form-label">Tanggal Panen : </label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1"
+                                name="tanggal_panen"
+                                @isset($hasilProduksiEdit)
+                                value="{{ $hasilProduksiEdit->tanggal_panen }}"
                             @endisset>
-                            @error('tanggal')
+                            @error('tanggal_panen')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="mb-3" style="margin-right: 7px;">
-                            <label for="exampleFormControlInput1" class="form-label">N : </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="n"
-                                @isset($npkEdit)
-                                value="{{ $npkEdit->n }}"
+                            <label for="exampleFormControlInput1" class="form-label">Jumlah Pohon : </label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="jumlah_pohon"
+                                @isset($hasilProduksiEdit)
+                                value="{{ $hasilProduksiEdit->jumlah_pohon }}"
                             @endisset>
-                            @error('n')
+                            @error('jumlah_pohon')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="mb-3" style="margin-right: 7px;">
-                            <label for="exampleFormControlInput1" class="form-label">P : </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="p"
-                                @isset($npkEdit)
-                                value="{{ $npkEdit->p }}"
+                            <label for="exampleFormControlInput1" class="form-label">Jumlah Bunga : </label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="jumlah_bunga"
+                                @isset($hasilProduksiEdit)
+                                value="{{ $hasilProduksiEdit->jumlah_bunga }}"
                             @endisset>
-                            @error('p')
+                            @error('jumlah_bunga')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="mb-3" style="margin-right: 7px;">
-                            <label for="exampleFormControlInput1" class="form-label">K : </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="k"
-                                @isset($npkEdit)
-                                value="{{ $npkEdit->k }}"
+                            <label for="exampleFormControlInput1" class="form-label">Ukuran Kelopak : </label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="ukuran_kelopak"
+                                @isset($hasilProduksiEdit)
+                                value="{{ $hasilProduksiEdit->ukuran_kelopak }}"
                             @endisset>
-                            @error('k')
+                            @error('ukuran_kelopak')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
@@ -75,8 +75,8 @@
                         </div>
                     </div>
                     <div class="submit text-center">
-                        @isset($npkEdit)
-                                <a href="/npk" class="btn btn-outline-success mb-3">Cancel</a>
+                        @isset($hasilProduksiEdit)
+                                <a href="/hasilproduksi" class="btn btn-outline-success mb-3">Cancel</a>
                         @endisset
                         <button type="submit" class="btn btn-success mb-3" style="margin-left: 12px;">Save</button>
                     </div>
@@ -91,31 +91,25 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>N</th>
-                                <th class="text-success">Status</th>
-                                <th>P</th>
-                                <th class="text-success">Status</th>
-                                <th>K</th>
-                                <th class="text-success">Status</th>
+                                <th>Tanggal Panen</th>
+                                <th>Jumlah Pohon</th>
+                                <th>Jumlah Bunga</th>
+                                <th>Ukuran Kelopak</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($npk as $data)
+                            @foreach ($hasilproduksi as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->tanggal }}</td>
-                                    <td>{{ $data->n }}</td>
-                                    <td class="text-success">normal</td>
-                                    <td>{{ $data->p }}</td>
-                                    <td class="text-success">kurang</td>
-                                    <td>{{ $data->k }}</td>
-                                    <td class="text-success">lebih</td>
+                                    <td>{{ $data->tanggal_panen }}</td>
+                                    <td>{{ $data->jumlah_pohon }}</td>
+                                    <td>{{ $data->jumlah_bunga }}</td>
+                                    <td>{{ $data->ukuran_kelopak }}</td>
                                     <td>
-                                        <a href="{{ route('npk.edit', $data->id) }}" class="btn btn-primary"><i
+                                        <a href="{{ route('hasilproduksi.edit', $data->id) }}" class="btn btn-primary"><i
                                                 class="fas fa-edit"></i></a>
-                                        <form action="{{ route('npk.destroy', $data->id) }}" method="POST"
+                                        <form action="{{ route('hasilproduksi.destroy', $data->id) }}" method="POST"
                                             class="d-inline-block">
                                             @csrf
                                             @method('delete')
@@ -127,7 +121,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $npk->links() }}
+                    {{ $hasilproduksi->links() }}
                 </div>
             </div>
         </div>

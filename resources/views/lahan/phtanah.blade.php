@@ -14,60 +14,60 @@
     </style>
     <div class="container-fluid">
         <div class="card">
-            <div class="card-header text-center">NPK</div>
+            <div class="card-header text-center">PH TANAH</div>
             <div class="card-body">
-                @if ( isset($npkEdit) )
-                    <form action="{{ route('npk.update',$npkEdit->id) }}" method="POST">
+                @if ( isset($phTanahEdit) )
+                    <form action="{{ route('phtanah.update',$phTanahEdit->id) }}" method="POST">
                         @method('put')
                 @else 
-                    <form action="{{ route('npk.store') }}" method="POST">
+                    <form action="{{ route('phtanah.store') }}" method="POST">
                 @endif
                     @csrf
                     <div class="col-lg-12 formInput justify-content-center">
                         <div class="mb-3" style="margin-right: 7px;">
-                            <label for="exampleFormControlInput1" class="form-label">Tanggal : </label>
-                            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="tanggal"
-                                name="tanggal"
-                                @isset($npkEdit)
-                                value="{{ $npkEdit->tanggal }}"
+                            <label for="exampleFormControlInput1" class="form-label">Tanggal Sebar : </label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1"
+                                name="tanggal_sebar"
+                                @isset($phTanahEdit)
+                                value="{{ $phTanahEdit->tanggal_sebar }}"
                             @endisset>
-                            @error('tanggal')
+                            @error('tanggal_sebar')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="mb-3" style="margin-right: 7px;">
-                            <label for="exampleFormControlInput1" class="form-label">N : </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="n"
-                                @isset($npkEdit)
-                                value="{{ $npkEdit->n }}"
+                            <label for="exampleFormControlInput1" class="form-label">Volume Dolomit : </label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="volume_dolomit"
+                                @isset($phTanahEdit)
+                                value="{{ $phTanahEdit->volume_dolomit }}"
                             @endisset>
-                            @error('n')
+                            @error('volume_dolomit')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="mb-3" style="margin-right: 7px;">
-                            <label for="exampleFormControlInput1" class="form-label">P : </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="p"
-                                @isset($npkEdit)
-                                value="{{ $npkEdit->p }}"
+                            <label for="exampleFormControlInput1" class="form-label">Tanggal Pengukuran : </label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1" name="tanggal_pengukuran"
+                                @isset($phTanahEdit)
+                                value="{{ $phTanahEdit->tanggal_pengukuran }}"
                             @endisset>
-                            @error('p')
+                            @error('tanggal_pengukuran')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="mb-3" style="margin-right: 7px;">
-                            <label for="exampleFormControlInput1" class="form-label">K : </label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="k"
-                                @isset($npkEdit)
-                                value="{{ $npkEdit->k }}"
+                            <label for="exampleFormControlInput1" class="form-label">PH : </label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="ph"
+                                @isset($phTanahEdit)
+                                value="{{ $phTanahEdit->ph }}"
                             @endisset>
-                            @error('k')
+                            @error('ph')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
@@ -75,8 +75,8 @@
                         </div>
                     </div>
                     <div class="submit text-center">
-                        @isset($npkEdit)
-                                <a href="/npk" class="btn btn-outline-success mb-3">Cancel</a>
+                        @isset($phTanahEdit)
+                                <a href="/phtanah" class="btn btn-outline-success mb-3">Cancel</a>
                         @endisset
                         <button type="submit" class="btn btn-success mb-3" style="margin-left: 12px;">Save</button>
                     </div>
@@ -91,31 +91,25 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>N</th>
-                                <th class="text-success">Status</th>
-                                <th>P</th>
-                                <th class="text-success">Status</th>
-                                <th>K</th>
-                                <th class="text-success">Status</th>
+                                <th>Tanggal Sebar</th>
+                                <th>Volume Dolomit</th>
+                                <th>Tanggal Pengukuran</th>
+                                <th>PH</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($npk as $data)
+                            @foreach ($phtanah as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->tanggal }}</td>
-                                    <td>{{ $data->n }}</td>
-                                    <td class="text-success">normal</td>
-                                    <td>{{ $data->p }}</td>
-                                    <td class="text-success">kurang</td>
-                                    <td>{{ $data->k }}</td>
-                                    <td class="text-success">lebih</td>
+                                    <td>{{ $data->tanggal_sebar }}</td>
+                                    <td>{{ $data->volume_dolomit }}</td>
+                                    <td>{{ $data->tanggal_pengukuran }}</td>
+                                    <td>{{ $data->ph }}</td>
                                     <td>
-                                        <a href="{{ route('npk.edit', $data->id) }}" class="btn btn-primary"><i
+                                        <a href="{{ route('phtanah.edit', $data->id) }}" class="btn btn-primary"><i
                                                 class="fas fa-edit"></i></a>
-                                        <form action="{{ route('npk.destroy', $data->id) }}" method="POST"
+                                        <form action="{{ route('phtanah.destroy', $data->id) }}" method="POST"
                                             class="d-inline-block">
                                             @csrf
                                             @method('delete')
@@ -127,7 +121,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $npk->links() }}
+                    {{ $phtanah->links() }}
                 </div>
             </div>
         </div>

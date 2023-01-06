@@ -77,6 +77,9 @@ class NpkController extends Controller
     public function edit(Npk $npk)
     {
         //
+        if ( $npk->user_id !== auth()->user()->id ){
+            return redirect('/npk');
+        }
         $npkEdit = $npk;
         $npk = Npk::where('user_id',auth()->user()->id)->paginate(10);
         return view('lahan.npk',compact('npkEdit','npk'));

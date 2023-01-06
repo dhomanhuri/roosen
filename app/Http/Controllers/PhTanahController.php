@@ -15,6 +15,8 @@ class PhTanahController extends Controller
     public function index()
     {
         //
+        $phtanah = PhTanah::where('user_id',auth()->user()->id)->paginate(10);
+        return view('lahan.phtanah',compact('phtanah'));
     }
 
     /**
@@ -36,6 +38,23 @@ class PhTanahController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'tanggal_sebar' => 'required',
+            'volume_dolomit' => 'required',
+            'tanggal_pengukuran' => 'required',
+            'ph' => 'required',
+        ]);
+
+
+        PhTanah::create([
+            'user_id' => auth()->user()->id,
+            'tanggal_sebar' => $request->tanggal_sebar,
+            'volume_dolomit' => $request->volume_dolomit,
+            'tanggal_pengukuran' => $request->tanggal_pengukuran,
+            'ph' => $request->ph,
+        ]);
+
+        return redirect('/phtanah')->with('success','berhasil menambahkan data');
     }
 
     /**
@@ -55,9 +74,15 @@ class PhTanahController extends Controller
      * @param  \App\Models\PhTanah  $phTanah
      * @return \Illuminate\Http\Response
      */
-    public function edit(PhTanah $phTanah)
+    public function edit(PhTanah $phTanah,$id)
     {
         //
+        $phTanahEdit = PhTanah::findOrFail($id);
+        if ( $phTanahEdit->user_id !== auth()->user()->id ){
+            return redirect('/phtanah');
+        }
+        $phtanah = PhTanah::where('user_id',auth()->user()->id)->paginate(10);
+        return view('lahan.phtanah',compact('phTanahEdit','phtanah'));
     }
 
     /**
@@ -67,9 +92,28 @@ class PhTanahController extends Controller
      * @param  \App\Models\PhTanah  $phTanah
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PhTanah $phTanah)
+    public function update(Request $request, PhTanah $phTanah,$id)
     {
         //
+
+        $request->validate([
+            'tanggal_sebar' => 'required',
+            'volume_dolomit' => 'required',
+            'tanggal_pengukuran' => 'required',
+            'ph' => 'required',
+        ]);
+
+        $phtanah = PhTanah::findOrFail($id);
+
+        $phtanah->update([
+            'user_id' => auth()->user()->id,
+            'tanggal_sebar' => $request->tanggal_sebar,
+            'volume_dolomit' => $request->volume_dolomit,
+            'tanggal_pengukuran' => $request->tanggal_pengukuran,
+            'ph' => $request->ph,
+        ]);
+
+        return redirect('/phtanah')->with('success','berhasil edit data');
     }
 
     /**
@@ -78,8 +122,11 @@ class PhTanahController extends Controller
      * @param  \App\Models\PhTanah  $phTanah
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PhTanah $phTanah)
+    public function destroy(PhTanah $phTanah,$id)
     {
         //
+        $phtanah = PhTanah::findOrFail($id);
+        $phtanah->delete();
+        return redirect('/phtanah')->with('success','berhasil delete data');
     }
 }

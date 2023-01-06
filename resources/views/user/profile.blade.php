@@ -19,7 +19,7 @@
             top:0;
             width:4px;
             height:100%;
-            background-color:#beefe2;
+            background-color:#efbebe;
             transform:scaleY(1);
             transition:all 0.5s;
             transform-origin: bottom
@@ -33,7 +33,7 @@
             top:0;
             width:4px;
             height:100%;
-            background-color:#00ed63;
+            background-color:#ff0707;
             transform:scaleY(0);
             transition:all 0.5s;
             transform-origin: bottom
@@ -106,13 +106,19 @@
                                     <p>Status : <span class="text-success text-uppercase">{{ auth()->user()->role }}</span></p>
                                     <p>Name : {{ auth()->user()->name }}</p>
                                     <p>Email : {{ auth()->user()->email }}</p>
+                                    @if ( auth()->user()->role == 'petani')
+                                    <p>Alamat Rumah : {{ auth()->user()->alamat_rumah }}</p>
+                                    <p>Alamat Lahan : {{ auth()->user()->alamat_lahan }}</p>
+                                    <p>Luas Lahan : {{ auth()->user()->luas_lahan }} ( m2 )</p>
+                                    <p>Jenis Tanaman : {{ auth()->user()->jenis_tanaman }}</p>
+                                    @endif
                                     <p>Created : {{ auth()->user()->created_at }}</p>
                                 </div>
                                 
                                 <div class="buttons">
                                     
-                                    <a class="btn btn-outline-success px-4" href="{{ url('home') }}">Back To Dashboard</a>
-                                    <a class="btn btn-success px-4 ms-3" href="{{ url('user/setting/' . auth()->user()->id ) }}">Settings</a>
+                                    <a class="btn btn-outline-danger px-4" href="{{ url('home') }}">Back To Dashboard</a>
+                                    <a class="btn btn-danger px-4 ms-3" href="{{ url('user/setting/' . auth()->user()->id ) }}">Settings</a>
                                 </div>
                                 
                                 

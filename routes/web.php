@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\NpkController;
 use App\Http\Controllers\PenyiramanController;
-use App\Http\Controllers\PetaniController;
 use App\Http\Controllers\PhTanahController;
+use App\Http\Controllers\HasilProduksiController;
+use App\Http\Controllers\PemupukanController;
+
+use App\Http\Controllers\PetaniController;
 use App\Http\Controllers\UserController;
-use App\Models\HasilProduksi;
-use App\Models\Pemupukan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,5 +47,5 @@ route::resource('/petani',PetaniController::class);
 route::resource('/npk',NpkController::class);
 route::resource('/phtanah',PhTanahController::class);
 route::resource('/penyiraman',PenyiramanController::class);
-route::resource('/pemupukan',Pemupukan::class);
-route::resource('/hasilproduksi',HasilProduksi::class);
+route::resource('/pemupukan',PemupukanController::class);
+route::resource('/hasilproduksi',HasilProduksiController::class);

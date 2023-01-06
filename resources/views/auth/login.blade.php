@@ -36,7 +36,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <label for="" style="" class="text-dark fs-1 mb-3">Roo<span
-                                class="text-success">sen</span></label>
+                                class="text-danger">sen</span></label>
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -65,10 +65,10 @@
 
 
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-success btn-lg"
+                            <button type="submit" class="btn btn-danger btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                             <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="{{ url('/register') }}"
-                                    class="link-success">Register</a></p>
+                                    class="link-danger">Register</a></p>
                         </div>
 
                     </form>

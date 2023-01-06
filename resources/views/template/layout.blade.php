@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
 
     <style>
-
+        ul.nav a:hover { color: rgb(245, 0, 0) !important; }
     </style>
 </head>
 
@@ -30,7 +30,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+            <a class="navbar-brand text-danger logo h1 align-self-center" href="{{ url('/index') }}">
                 Roosen
             </a>
 
@@ -40,7 +40,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+            <div class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
                 id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">

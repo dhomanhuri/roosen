@@ -27,7 +27,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -77,10 +77,10 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Kelola Lahan</h6>
                         <a class="collapse-item" href="{{ url('/npk') }}">NPK</a>
-                        <a class="collapse-item" href="utilities-border.html">PH TANAH</a>
-                        <a class="collapse-item" href="utilities-animation.html">Penyiraman</a>
-                        <a class="collapse-item" href="utilities-other.html">Pemupukan</a>
-                        <a class="collapse-item" href="utilities-other.html">Hasil Produksi</a>
+                        <a class="collapse-item" href="{{ url('/phtanah') }}">PH TANAH</a>
+                        <a class="collapse-item" href="{{ url('/penyiraman') }}">Penyiraman</a>
+                        <a class="collapse-item" href="{{ url('/pemupukan') }}">Pemupukan</a>
+                        <a class="collapse-item" href="{{ url('/hasilproduksi') }}">Hasil Produksi</a>
                     </div>
                 </div>
             </li>
