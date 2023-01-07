@@ -7,7 +7,11 @@ use App\Http\Controllers\HasilProduksiController;
 use App\Http\Controllers\PemupukanController;
 
 use App\Http\Controllers\PetaniController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+
+use Illuminate\Http\Response;
+use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +25,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('storage/{filename}', function ($filename)
+{
+    $path = storage_path('app/public/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
 
 Route::get('/', function () {
     return view('index');
@@ -49,3 +69,6 @@ route::resource('/phtanah',PhTanahController::class);
 route::resource('/penyiraman',PenyiramanController::class);
 route::resource('/pemupukan',PemupukanController::class);
 route::resource('/hasilproduksi',HasilProduksiController::class);
+
+// Product Routes
+route::resource('/product',ProductController::class);

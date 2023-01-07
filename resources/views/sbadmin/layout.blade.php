@@ -85,7 +85,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="{{ url('/product') }}" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fab fa-product-hunt"></i>
                     <span>My Product</span>
                 </a>
