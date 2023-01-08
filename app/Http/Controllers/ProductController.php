@@ -13,6 +13,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function productIndex(){
+
+        $product = Product::paginate(12);
+        return view('product',compact('product'));
+    }
+
+
     public function index()
     {
         //
@@ -80,6 +88,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
+        return view('product.edit',compact('product'));
     }
 
     /**
@@ -92,6 +101,27 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $request->validate([
+            'nama' => 'required',
+            'harga' => 'required|string',
+            'stok' => 'required|integer',
+            'keterangan' => 'required',
+            'gambar' => empty($request->file('gambar')) ? '' : 'required|image|mimes:jpeg,png,jpg',
+        ]);
+
+        if ( !empty($request->file('gambar')) ){
+            Storage::delete($product->gambar);
+        }
+
+        $product->update([
+            'nama' => $request->nama,
+            'harga' => $request->harga,   
+            'stok' => $request->stok,   
+            'keterangan' => $request->keterangan,   
+            'gambar' => empty($request->file('gambar')) ? $product->gambar : $request->file('gambar')->store('productfoto'),   
+        ]);
+
+        return redirect('/product')->with('success','berhasil edit product');
     }
 
     /**

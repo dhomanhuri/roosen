@@ -25,22 +25,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('storage/{filename}', function ($filename)
-{
-    $path = storage_path('app/public/' . $filename);
 
-    if (!File::exists($path)) {
-        abort(404);
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
+// Index Routes
 
 Route::get('/', function () {
     return view('index');
@@ -49,9 +35,17 @@ Route::get('/index', function () {
     return view('index');
 });
 
-Auth::routes();
+route::get('/product/all',[ProductController::class,'productIndex'])->name('productIndex');
+
+
+
+
+
+
+// Dashboard Routes
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
 
 // User Routes
 route::get('user/profile/{user}',[UserController::class,'profile']);
