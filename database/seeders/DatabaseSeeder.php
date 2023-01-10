@@ -23,19 +23,19 @@ class DatabaseSeeder extends Seeder
 
         Product::factory(100)->create();
 
-        // \App\Models\User::create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@gmail.com',
-        //     'role' => 'admin',
-        //     'foto' => 'default.jpeg',
-        //     'password' => bcrypt('ugans123'),
-        // ]);
-        // \App\Models\User::create([
-        //     'name' => 'Muhammad Imam',
-        //     'email' => 'saitamasensei2005@gmail.com',
-        //     'role' => 'petani',
-        //     'foto' => 'userfoto/jZjV2DPNTiaeQCAEFFJSawdYCVuNCNV7zh6Mb8Jl.jpg',
-        //     'password' => bcrypt('ugans123'),
-        // ]);
+        \App\Models\User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'role' => 'admin',
+            'foto' => 'default.jpeg',
+            'password' => bcrypt('ugans123'),
+        ]);
+        \App\Models\User::create([
+            'name' => 'Muhammad Imam',
+            'email' => 'saitamasensei2005@gmail.com',
+            'role' => 'petani',
+            'foto' => 'userfoto/jZjV2DPNTiaeQCAEFFJSawdYCVuNCNV7zh6Mb8Jl.jpg',
+            'password' => bcrypt('ugans123'),
+        ]);
     }
 }

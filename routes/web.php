@@ -36,6 +36,7 @@ Route::get('/index', function () {
 });
 
 route::get('/product/all',[ProductController::class,'productIndex'])->name('productIndex');
+route::get('product/cari',[ProductController::class,'search'])->name('product.search');
 
 
 

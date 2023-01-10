@@ -21,6 +21,13 @@ class ProductController extends Controller
     }
 
 
+    public function search(Request $request){
+        $product = Product::where('nama','like',"%".$request->keyword."%")->paginate(12)->withQueryString();
+        $productAll = Product::where('nama','like',"%".$request->keyword."%");
+
+        return view('product',compact('product','productAll'));
+    }
+
     public function index()
     {
         //
@@ -77,6 +84,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        return view('product.show',compact('product'));
     }
 
     /**
