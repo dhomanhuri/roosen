@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\NpkController;
 use App\Http\Controllers\PenyiramanController;
 use App\Http\Controllers\PhTanahController;
@@ -67,3 +68,8 @@ route::resource('/hasilproduksi',HasilProduksiController::class);
 
 // Product Routes
 route::resource('/product',ProductController::class);
+route::get('product/dashboard/search',[ProductController::class,'searchDashboard'])->name('product.search.dashboard');
+
+
+// Cart Routes
+route::resource('/cart',CartController::class);

@@ -65,7 +65,12 @@
                         {{-- <i class="fa fa-fw fa-search text-dark mr-2"></i> --}}
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i> 
+                        @auth
+                        @if(auth()->user()->role == 'pembeli') 
+                            ( {{ auth()->user()->cart->count() }} )
+                        @endif
+                        @endauth
                         {{-- <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span> --}}
                     </a>
                     @auth
@@ -77,6 +82,10 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{ url('/home') }}">Home</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <li><button class="dropdown-item btn btn-danger" type="submit">Log Out</button></li>
+                                </form>
                             </ul>
                         </div>
                     @endauth

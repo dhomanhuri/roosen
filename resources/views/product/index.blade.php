@@ -17,7 +17,15 @@
                         {!! \Session::get('success') !!}
                     </div>
                 @endif
+               
                 <a href="{{ route('product.create') }}#form" class="btn btn-outline-success mb-3"><i class="fas fa-plus-circle"></i> Add Product</a>
+                <form action="{{ route('product.search.dashboard') }}" method="GET">
+                <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="CARI PRODUCT" name="keyword" value="{{ request('keyword') }}" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <button class="btn btn-danger" id="basic-addon2" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+                {{ $product->links() }}
                 <div class="table-responsive rounded-top">
                     <table class="table shadow-sm display-5">
                         <thead>

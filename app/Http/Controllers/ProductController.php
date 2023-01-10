@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,25 +15,35 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function productIndex(){
+    public function productIndex()
+    {
 
         $product = Product::paginate(12);
-        return view('product',compact('product'));
+        return view('product', compact('product'));
+    }
+
+    public function searchDashboard(Request $request)
+    {
+        $product = Product::where('nama', 'like', "%" . $request->keyword . "%")->paginate(10)->withQueryString();
+        $productAll = Product::where('nama', 'like', "%" . $request->keyword . "%");
+
+        return view('product.index', compact('product', 'productAll'));
     }
 
 
-    public function search(Request $request){
-        $product = Product::where('nama','like',"%".$request->keyword."%")->paginate(12)->withQueryString();
-        $productAll = Product::where('nama','like',"%".$request->keyword."%");
+    public function search(Request $request)
+    {
+        $product = Product::where('nama', 'like', "%" . $request->keyword . "%")->paginate(12)->withQueryString();
+        $productAll = Product::where('nama', 'like', "%" . $request->keyword . "%");
 
-        return view('product',compact('product','productAll'));
+        return view('product', compact('product', 'productAll'));
     }
 
     public function index()
     {
         //
-        $product = Product::where('user_id',auth()->user()->id)->paginate(10);
-        return view('product.index',compact('product'));
+        $product = Product::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
+        return view('product.index', compact('product'));
     }
 
     /**
@@ -72,7 +83,7 @@ class ProductController extends Controller
             'gambar' => $request->file('gambar')->store('productfoto')
         ]);
 
-        return redirect('/product')->with('success','berhasil menambahkan product');
+        return redirect('/product')->with('success', 'berhasil menambahkan product');
     }
 
     /**
@@ -84,7 +95,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        return view('product.show',compact('product'));
+        $cart = Cart::where('user_id',auth()->user()->id)->get();
+        return view('product.show', compact('product','cart'));
     }
 
     /**
@@ -96,7 +108,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-        return view('product.edit',compact('product'));
+        return view('product.edit', compact('product'));
     }
 
     /**
@@ -117,19 +129,19 @@ class ProductController extends Controller
             'gambar' => empty($request->file('gambar')) ? '' : 'required|image|mimes:jpeg,png,jpg',
         ]);
 
-        if ( !empty($request->file('gambar')) ){
+        if (!empty($request->file('gambar'))) {
             Storage::delete($product->gambar);
         }
 
         $product->update([
             'nama' => $request->nama,
-            'harga' => $request->harga,   
-            'stok' => $request->stok,   
-            'keterangan' => $request->keterangan,   
-            'gambar' => empty($request->file('gambar')) ? $product->gambar : $request->file('gambar')->store('productfoto'),   
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'keterangan' => $request->keterangan,
+            'gambar' => empty($request->file('gambar')) ? $product->gambar : $request->file('gambar')->store('productfoto'),
         ]);
 
-        return redirect('/product')->with('success','berhasil edit product');
+        return redirect('/product')->with('success', 'berhasil edit product');
     }
 
     /**
@@ -144,6 +156,6 @@ class ProductController extends Controller
         Storage::delete($product->gambar);
         $product->delete();
 
-        return redirect('/product')->with('success','berhasil menghapus product');
+        return redirect('/product')->with('success', 'berhasil menghapus product');
     }
 }

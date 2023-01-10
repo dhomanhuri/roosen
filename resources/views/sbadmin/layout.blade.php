@@ -111,7 +111,7 @@
 
             @if (auth()->user()->role == 'pembeli')
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseTwo">
+                    <a class="nav-link collapsed" href="{{ url('/product/all') }}" aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fab fa-product-hunt"></i>
                         <span>Product</span>
                     </a>
