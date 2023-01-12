@@ -72,6 +72,7 @@
                         </div>
                     </form>
                 @endisset
+                {{ $cart->links() }}
                 <div class="table-responsive">
                     <table class="table table-bordered m-0">
                         <thead>
@@ -130,6 +131,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mt-2">
+                        {{ $cart->links() }}
+                    </div>
                 </div>
                 <!-- / Shopping cart table -->
 
