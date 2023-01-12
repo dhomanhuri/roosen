@@ -120,30 +120,35 @@
                                         {{ $product->stok }}</button>
 
                                 </div>
-                                <form action="{{ route('cart.store') }}" method="POST">
-                                    @csrf
-                                    <div class="col-5 d-flex mt-4">
-                                        <button class="btn btn-link px-2"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                            type="button">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
+                                @if ($cart == null)
+                                    <form action="{{ route('cart.store') }}" method="POST">
+                                @else
+                                    <form action="{{ route('cart.destroy',$product->id) }}" method="POST">
+                                    @method('delete')
+                                @endif
+                                @csrf
+                                <div class="col-5 d-flex mt-4">
+                                    <button class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                        type="button">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
 
-                                        <input id="form1" min="0" max="{{ $product->stok }}" name="qty"
-                                            value="1" type="number" class="form-control form-control-sm" />
+                                    <input id="form1" min="0" max="{{ $product->stok }}" name="qty"
+                                        value="1" type="number" class="form-control form-control-sm" />
 
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-                                        <button class="btn btn-link px-2"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                            type="button">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="cart mt-4 align-items-center">
-                                        <button class="btn btn-danger text-uppercase mr-2 px-4" type="submit"><i
-                                                class="fa fa-cart-plus mr-2"></i>Add to cart</button>
-                                    </div>
+                                    <button class="btn btn-link px-2"
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                        type="button">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="cart mt-4 align-items-center">
+                                    <button class="btn btn-danger text-uppercase mr-2 px-4" type="submit"><i
+                                            class="fa fa-cart-plus mr-2"></i>{{ $cart == null ? 'Add to cart' : 'Remove from cart' }}</button>
+                                </div>
                                 </form>
                             </div>
                         </div>

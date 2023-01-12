@@ -34,7 +34,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Muhammad Imam',
             'email' => 'saitamasensei2005@gmail.com',
             'role' => 'petani',
-            'foto' => 'userfoto/jZjV2DPNTiaeQCAEFFJSawdYCVuNCNV7zh6Mb8Jl.jpg',
+            'foto' => 'userfoto/AGcwdOGuQ4RbkP7iW8zc2SWPGg0fNWQLgVimBqJQ.jpg',
+            'password' => bcrypt('ugans123'),
+        ]);
+        \App\Models\User::create([
+            'name' => 'Risqi Nur',
+            'email' => 'pembeli@gmail.com',
+            'role' => 'pembeli',
+            'foto' => 'userfoto/AGcwdOGuQ4RbkP7iW8zc2SWPGg0fNWQLgVimBqJQ.jpg',
             'password' => bcrypt('ugans123'),
         ]);
     }

@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             //
             'user_id' => 2,
             'nama' => $this->faker->sentence(mt_rand(5,10)),
-            'harga' => '20.000',
+            'harga' => 20000,
             'stok' => '10',
             'keterangan' => $this->faker->sentence(mt_rand(20,40)),
             'gambar' => 'productfoto/WjHtvOiRAogmCuccNeAqp2UZ7LjnbZgXh19FIIRn.jpg',

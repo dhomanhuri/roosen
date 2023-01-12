@@ -153,7 +153,7 @@
 
                             </div>
 
-                            <h3 class="mb-0 font-weight-semibold">Rp . {{ $pro->harga }}</h3>
+                            <h3 class="mb-0 font-weight-semibold">{{ number_format($pro->harga,2,',','.') }}</h3>
 
                             <div class="text-dark">
                                 <i class="fa fa-star star"></i>

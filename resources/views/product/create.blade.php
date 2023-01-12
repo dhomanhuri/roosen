@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Harga ( Ex : 20.000 )</label>
+                        <label for="exampleFormControlInput1" class="form-label">Harga ( Ex : 20000 )</label>
                         <input type="harga" class="form-control form-control-sm" id="exampleFormControlInput1"
                             name="harga" required>
 

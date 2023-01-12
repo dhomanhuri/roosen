@@ -64,7 +64,7 @@
                         data-bs-target="#templatemo_search">
                         {{-- <i class="fa fa-fw fa-search text-dark mr-2"></i> --}}
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="{{ url('/cart') }}">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i> 
                         @auth
                         @if(auth()->user()->role == 'pembeli') 

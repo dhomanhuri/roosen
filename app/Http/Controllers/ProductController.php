@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function productIndex()
     {
 
-        $product = Product::paginate(12);
+        $product = Product::latest()->paginate(12);
         return view('product', compact('product'));
     }
 
@@ -29,6 +29,7 @@ class ProductController extends Controller
 
         return view('product.index', compact('product', 'productAll'));
     }
+
 
 
     public function search(Request $request)
@@ -95,7 +96,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        $cart = Cart::where('user_id',auth()->user()->id)->get();
+        $cart = Cart::where('product_id',$product->id)->first();
         return view('product.show', compact('product','cart'));
     }
 
