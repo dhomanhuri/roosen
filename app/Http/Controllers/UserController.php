@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -78,7 +79,13 @@ class UserController extends Controller
 
     public function deleteUser($id){
         $user = User::find($id);
+        $cart = Cart::where('user_id',$id)->get();
         Storage::delete($user->foto);
+        
+        foreach( $cart as $crt){
+            $crt->delete();
+        }
+
         $user->delete();
 
         return redirect('/login')->with('success','Akun anda berhasil dihapus');

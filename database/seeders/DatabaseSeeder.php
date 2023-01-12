@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('ugans123'),
         ]);
         \App\Models\User::create([
-            'name' => 'Risqi Nur',
+            'name' => 'Risqi Nur Ramadhan',
             'email' => 'pembeli@gmail.com',
             'role' => 'pembeli',
             'foto' => 'userfoto/AGcwdOGuQ4RbkP7iW8zc2SWPGg0fNWQLgVimBqJQ.jpg',
