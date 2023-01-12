@@ -109,8 +109,9 @@
                                 </div>
                                 <div class="mt-4 mb-3"> <span class="text-muted brand">{{ $product->user->name }}</span>
                                     <h5 class="text-uppercase">{{ $product->nama }}</h5>
-                                    <div class="price d-flex flex-row align-items-center"> <span class="act-price">Rp
-                                            {{ $product->harga }}</span>
+                                    <div class="price d-flex flex-row align-items-center"> <span class="act-price">
+                                        Rp . {{ number_format($product->harga, 2, ',', '.') }}
+                                    </span>
                                     </div>
                                 </div>
                                 <p class="about">{{ $product->keterangan }}</p>

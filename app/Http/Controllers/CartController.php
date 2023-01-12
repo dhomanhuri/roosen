@@ -56,12 +56,18 @@ class CartController extends Controller
             ]
         );
 
+        $pathCheck = str_contains(url()->previous(),'/product/all');
+
 
         Cart::create([
             'user_id' => auth()->user()->id,
             'product_id' => $request->product_id,
-            'qty' => $request->qty,
+            'qty' => $pathCheck ? 1 : $request->qty,
         ]);
+
+        if( $pathCheck ){
+            return redirect("/product/all")->with('success', 'product ditambahkan ke keranjang');
+        }
 
         return redirect("product/$request->product_id")->with('success', 'product ditambahkan ke keranjang');
     }
@@ -141,7 +147,10 @@ class CartController extends Controller
 
         if( str_contains(url()->previous(),'/cart') ){
             return redirect("/cart")->with('success', 'product dihapus dari keranjang');
+        } else if ( str_contains(url()->previous(),'/product/all') ){
+            return redirect("/product/all")->with('success', 'product dihapus dari keranjang');
         }
+        
         return redirect("product/$productid")->with('success', 'product dihapus dari keranjang');
     }
 }

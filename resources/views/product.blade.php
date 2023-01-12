@@ -132,47 +132,68 @@
                     </div>
                 @endif
             @endisset
+            @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    {!! \Session::get('success') !!}
+                </div>
+            @endif
             {{ $product->links() }}
-            @if ($product->count() == 0 && !isset($productAll) )
+            @if ($product->count() == 0 && !isset($productAll))
                 <div class="col-lg-12">
                     <h1 class="text-center text-warning" style="font-size: 80px;"><i
                             class="fas fa-exclamation-triangle"></i></h1>
                     <p class="text-dark text-center">Product Is Empty</p>
                 </div>
             @else
-            @foreach ($product as $pro)
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 d-flex justify-content-center">
-                    <div class="card shadow mb-3" style="width: 23rem;">
-                        <img src="{{ asset('storage/'.$pro->gambar) }}" class="card-img-top p-3 shadow-sm" alt="..."
-                            height="300">
-                        <div class="card-body">
-                            <div class="mb-2">
-                                <h6 class="font-weight-semibold mb-2">
-                                    <a href="#" class="text-danger mb-2" data-abc="true">{{ $pro->nama }}</a>
-                                </h6>
+                @foreach ($product as $pro)
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 d-flex justify-content-center">
+                        <div class="card shadow mb-3" style="width: 23rem;">
+                            <img src="{{ asset('storage/' . $pro->gambar) }}" class="card-img-top p-3 shadow-sm"
+                                alt="..." height="300">
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <h6 class="font-weight-semibold mb-2">
+                                        <a href="#" class="text-danger mb-2" data-abc="true">{{ $pro->nama }}</a>
+                                    </h6>
+
+                                </div>
+
+                                <h3 class="mb-0 font-weight-semibold">{{ number_format($pro->harga, 2, ',', '.') }}</h3>
+
+                                <div class="text-dark">
+                                    <i class="fa fa-star star"></i>
+                                    <i class="fa fa-star star"></i>
+                                    <i class="fa fa-star star"></i>
+                                    <i class="fa fa-star star"></i>
+                                    <i class="fa fa-star star"></i>
+                                </div>
+
+                                <div class="text-dark mb-3">Stok : {{ $pro->stok }}</div>
+                                @if (!$pro->cart->where('product_id', $pro->id)->first() == null)
+                                    <form
+                                        action="{{ route('cart.destroy', $pro->cart->where('product_id', $pro->id)->first()->product_id) }}"
+                                        method="POST" class="d-inline">
+                                        @method('delete')
+                                    @else
+                                        <form action="{{ route('cart.store') }}" method="POST" class="d-inline">
+                                        <input type="hidden" value="{{ $pro->id }}" name="product_id">
+                                @endif
+                                @csrf
+                                <button type="submit" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i>
+                                    @if ($pro->cart->where('product_id', $pro->id)->first() == null)
+                                        Add to cart
+                                    @else
+                                        Remove to cart
+                                    @endif
+                                </button>
+                                </form>
+                                <a href="{{ route('product.show', $pro->id) }}" class="btn btn-outline-danger rounded"><i
+                                        class="fas fa-eye"></i></a>
 
                             </div>
-
-                            <h3 class="mb-0 font-weight-semibold">{{ number_format($pro->harga,2,',','.') }}</h3>
-
-                            <div class="text-dark">
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                                <i class="fa fa-star star"></i>
-                            </div>
-
-                            <div class="text-dark mb-3">Stok : {{ $pro->stok }}</div>
-
-                            <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to
-                                cart</button>
-                            <a href="{{ route('product.show',$pro->id) }}" class="btn btn-outline-danger rounded"><i class="fas fa-eye"></i></a>
-
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
             @endif
 
         </div>
