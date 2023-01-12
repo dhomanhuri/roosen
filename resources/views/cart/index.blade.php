@@ -56,7 +56,7 @@
                                 <input type="number" class="form-control" id="exampleFormControlInput1" name="qty"
                                     @isset($cartEdit)
                                 value="{{ $cartEdit->qty }}"
-                            @endisset>
+                            @endisset min="1">
                                 @error('qty')
                                     <div class="alert alert-danger" role="alert">
                                         {{ $message }}
