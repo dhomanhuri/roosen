@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="cart mt-4 align-items-center">
                                     <button class="btn btn-danger text-uppercase mr-2 px-4" type="submit"><i
-                                            class="fa fa-cart-plus mr-2"></i>{{ $cart == null ? 'Add to cart' : 'Remove from cart' }}</button>
+                                            class="fa fa-cart-plus mr-2"></i>{{ $cart == null ? 'add to cart' : 'remove from cart' }}</button>
                                 </div>
                                 </form>
                             </div>

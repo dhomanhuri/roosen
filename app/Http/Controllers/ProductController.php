@@ -14,11 +14,25 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['auth','ispetani'])->except('productIndex','show','search');
+    }
 
     public function productIndex()
     {
 
         $product = Product::latest()->paginate(12);
+        // $cart = Cart::where('user_id',auth()->user()->id);
+        // $cartUser = [];
+
+        // foreach ( $cart as $index=>$crt ){
+        //     $cartUser[] = $crt[$index]->product_id;
+        // }
+
+
+        // dd($cartUser);
+
         return view('product', compact('product'));
     }
 
@@ -96,7 +110,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        $cart = Cart::where('product_id',$product->id)->first();
+        $cart = auth()->user() ? Cart::where('product_id',$product->id)->where('user_id',auth()->user()->id)->first() : '' ;
+        
         return view('product.show', compact('product','cart'));
     }
 

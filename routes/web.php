@@ -41,35 +41,42 @@ route::get('product/cari',[ProductController::class,'search'])->name('product.se
 
 
 
-
-
-
 // Dashboard Routes
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
-// User Routes
-route::get('user/profile/{user}',[UserController::class,'profile']);
-route::get('user/setting/{user}',[UserController::class,'setting']);
-route::post('user/update/{user}',[UserController::class,'settingUpdate'])->name('user.update');
-route::post('user/delete/{user}',[UserController::class,'deleteUser'])->name('user.delete');
+Route::group(['middleware'=>'auth'], function(){
 
+    // User Routes
+    route::get('user/profile/{user}',[UserController::class,'profile']);
+    route::get('user/setting/{user}',[UserController::class,'setting']);
+    route::post('user/update/{user}',[UserController::class,'settingUpdate'])->name('user.update');
+    route::post('user/delete/{user}',[UserController::class,'deleteUser'])->name('user.delete');
 
-// Petani Routes
-route::resource('/petani',PetaniController::class);
+    // Petani Routes
+    route::resource('/petani',PetaniController::class)->middleware('isadmin');
 
-// Lahan Routes
-route::resource('/npk',NpkController::class);
-route::resource('/phtanah',PhTanahController::class);
-route::resource('/penyiraman',PenyiramanController::class);
-route::resource('/pemupukan',PemupukanController::class);
-route::resource('/hasilproduksi',HasilProduksiController::class);
+    Route::group(['middleware'=>'ispetani'], function(){
 
+        // Lahan Routes
+        route::resource('/npk',NpkController::class);
+        route::resource('/phtanah',PhTanahController::class);
+        route::resource('/penyiraman',PenyiramanController::class);
+        route::resource('/pemupukan',PemupukanController::class);
+        route::resource('/hasilproduksi',HasilProduksiController::class);
+    
+    });
+    
+    Route::group(['middleware'=>'ispembeli'], function(){
+        // Cart Routes
+        route::resource('/cart',CartController::class);
+    });
+    
+});
 // Product Routes
 route::resource('/product',ProductController::class);
 route::get('product/dashboard/search',[ProductController::class,'searchDashboard'])->name('product.search.dashboard');
 
 
-// Cart Routes
-route::resource('/cart',CartController::class);
+

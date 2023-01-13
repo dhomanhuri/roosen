@@ -169,26 +169,8 @@
                                 </div>
 
                                 <div class="text-dark mb-3">Stok : {{ $pro->stok }}</div>
-                                @if (!$pro->cart->where('product_id', $pro->id)->first() == null)
-                                    <form
-                                        action="{{ route('cart.destroy', $pro->cart->where('product_id', $pro->id)->first()->product_id) }}"
-                                        method="POST" class="d-inline">
-                                        @method('delete')
-                                    @else
-                                        <form action="{{ route('cart.store') }}" method="POST" class="d-inline">
-                                        <input type="hidden" value="{{ $pro->id }}" name="product_id">
-                                @endif
-                                @csrf
-                                <button type="submit" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i>
-                                    @if ($pro->cart->where('product_id', $pro->id)->first() == null)
-                                        Add to cart
-                                    @else
-                                        Remove to cart
-                                    @endif
-                                </button>
-                                </form>
                                 <a href="{{ route('product.show', $pro->id) }}" class="btn btn-outline-danger rounded"><i
-                                        class="fas fa-eye"></i></a>
+                                        class="fas fa-eye"></i> View</a>
 
                             </div>
                         </div>

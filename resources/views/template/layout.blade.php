@@ -93,7 +93,7 @@
                                         <li><a class="dropdown-item" href="{{ url('/home') }}">Home</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                             @csrf
-                                            <li><button class="dropdown-item btn btn-danger" type="submit">Log Out</button></li>
+                                            <li><button class="dropdown-item btn" type="submit">Log Out</button></li>
                                         </form>
                                     </ul>
                                 </div>

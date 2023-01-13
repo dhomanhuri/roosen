@@ -72,7 +72,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Luas Lahan</label>
-                        <input type="number" class="form-control form-control-sm" id="exampleFormControlInput1" name="luas_lahan" required>
+                        <input type="number" class="form-control form-control-sm" id="exampleFormControlInput1" min="1" name="luas_lahan" required>
 
                         @error('luas_lahan')
                             <div class="alert alert-danger" role="alert">

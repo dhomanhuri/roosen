@@ -17,8 +17,8 @@ class CartController extends Controller
     public function index()
     {
         //
-        $cartAll = Cart::all();
-        $cart = Cart::paginate(12);
+        $cartAll = Cart::where('user_id',auth()->user()->id)->get();
+        $cart = Cart::where('user_id',auth()->user()->id)->paginate(12);
         $totalBiaya = 0;
 
         for ( $i = 0; $i < count($cartAll); $i++){
@@ -47,28 +47,13 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate(
-            [
-                'product_id' => 'unique:carts'
-            ],
-            [
-                'product_id.unique' => 'Product sudah ada didalam cart'
-            ]
-        );
-
-        $pathCheck = str_contains(url()->previous(),'/product/all');
-
-
+       
         Cart::create([
             'user_id' => auth()->user()->id,
             'product_id' => $request->product_id,
-            'qty' => $pathCheck ? 1 : $request->qty,
+            'qty' => $request->qty,
         ]);
-
-        if( $pathCheck ){
-            return redirect("/product/all")->with('success', 'product ditambahkan ke keranjang');
-        }
-
+     
         return redirect("product/$request->product_id")->with('success', 'product ditambahkan ke keranjang');
     }
 
@@ -92,10 +77,17 @@ class CartController extends Controller
     public function edit(Cart $cart)
     {
         //
+
+        if( $cart->user_id !== auth()->user()->id ){
+            return redirect('/cart');
+        }
+
         $cartEdit = $cart;
-        $cartAll = Cart::all();
-        $cart = Cart::paginate(12);
+        $cartAll = Cart::where('user_id',auth()->user()->id)->paginate(12);
+        $cart = Cart::where('user_id',auth()->user()->id)->paginate(12);
         $totalBiaya = 0;
+
+
 
         for ( $i = 0; $i < count($cartAll); $i++){
             $totalBiaya += $cartAll[$i]->product->harga * $cartAll[$i]->qty;
