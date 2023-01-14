@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DaftarTransaksiController;
 use App\Http\Controllers\NpkController;
 use App\Http\Controllers\PenyiramanController;
 use App\Http\Controllers\PhTanahController;
@@ -71,6 +72,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::group(['middleware'=>'ispembeli'], function(){
         // Cart Routes
         route::resource('/cart',CartController::class);
+        route::resource('/payment',DaftarTransaksiController::class);
     });
     
 });

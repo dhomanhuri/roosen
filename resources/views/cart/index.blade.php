@@ -47,7 +47,7 @@
             @endif
             <div class="card-body">
                 @isset($cartEdit)
-                    <form action="{{ route('cart.update',$cartEdit->id) }}" method="POST">
+                    <form action="{{ route('cart.update', $cartEdit->id) }}" method="POST">
                         @csrf
                         @method('put')
                         <div class="col-lg-2 formInput">
@@ -56,7 +56,8 @@
                                 <input type="number" class="form-control" id="exampleFormControlInput1" name="qty"
                                     @isset($cartEdit)
                                 value="{{ $cartEdit->qty }}"
-                            @endisset min="1">
+                            @endisset
+                                    min="1">
                                 @error('qty')
                                     <div class="alert alert-danger" role="alert">
                                         {{ $message }}
@@ -151,10 +152,53 @@
                     <a href="{{ url('/product/all') }}" class="btn btn-lg btn-outline-primary md-btn-flat mt-2 mr-3">Back
                         to
                         shopping</a>
-                    <button type="button" class="btn btn-lg btn-primary mt-2">Checkout</button>
+                    {{-- Chekcout button  --}}
+                    <button type="button" class="btn btn-lg btn-primary mt-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Checkout
+                    </button>
+
+                    <!-- Modal Checkout -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header ">
+                                    <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel"><i class="fas fa-money-check text-primary"></i> Checkout</h1>
+                                    <button type="button" class="btn btn-close btn-danger shadow" data-bs-dismiss="modal"
+                                        aria-label="Close">X</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('payment.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="total_harga" value="{{ $totalBiaya }}">
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label text-dark">Alamat</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp" name="alamat_pembeli" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label text-dark">No HP</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp" name="nohp" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Checkout</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>
         </div>
     </div>
+
+
 @endsection
