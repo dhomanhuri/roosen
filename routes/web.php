@@ -6,6 +6,7 @@ use App\Http\Controllers\NpkController;
 use App\Http\Controllers\PenyiramanController;
 use App\Http\Controllers\PhTanahController;
 use App\Http\Controllers\HasilProduksiController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PemupukanController;
 
 use App\Http\Controllers\PetaniController;
@@ -30,12 +31,8 @@ use Illuminate\Support\Facades\Route;
 
 // Index Routes
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/index', function () {
-    return view('index');
-});
+Route::get('/', [IndexController::class,'index']);
+Route::get('/index', [IndexController::class,'index']);
 
 route::get('/product/all',[ProductController::class,'productIndex'])->name('productIndex');
 route::get('product/cari',[ProductController::class,'search'])->name('product.search');

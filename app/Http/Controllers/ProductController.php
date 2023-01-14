@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function productIndex()
     {
 
-        $product = Product::latest()->paginate(12);
+        $product = Product::latest()->paginate(6);
         // $cart = Cart::where('user_id',auth()->user()->id);
         // $cartUser = [];
 

@@ -2,147 +2,252 @@
 <html lang="en">
 
 <head>
-    <title>Roosen Website</title>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
 
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <title>Roosen</title>
 
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/templatemo.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!--
 
-    <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
+TemplateMo 546 Sixteen Clothing
 
-    <style>
-        ul.nav a:hover { color: rgb(245, 0, 0) !important; }
+https://templatemo.com/tm-546-sixteen-clothing
 
-        .bungkus1 {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 100vh;
-        }
+-->
 
-    </style>
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/templatemo-sixteen.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.css') }}">
+
 </head>
 
 <body>
 
-    <div class="bungkus1">
-        <div class="bungkus-2">
-            <!-- Header -->
-            <nav class="navbar navbar-expand-lg navbar-light shadow">
-                <div class="container d-flex justify-content-between align-items-center">
-        
-                    <a class="navbar-brand text-danger logo h1 align-self-center" href="{{ url('/index') }}">
-                        Roosen
-                    </a>
-        
-                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-        
-                    <div class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
-                        id="templatemo_main_nav">
-                        <div class="flex-fill">
-                            <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/index') }}">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('productIndex') }}">Product</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="navbar align-self-center d-flex">
-        
-                            <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
-                                data-bs-target="#templatemo_search">
-                                {{-- <i class="fa fa-fw fa-search text-dark mr-2"></i> --}}
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- Header -->
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <h2>Roosen</h2>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/index') }}">Home
+                                <span class="sr-only">(current)</span>
                             </a>
-                            <a class="nav-icon position-relative text-decoration-none" href="{{ url('/cart') }}">
-                                <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i> 
-                                @auth
-                                @if(auth()->user()->role == 'pembeli') 
-                                    ( {{ auth()->user()->cart->count() }} )
-                                @endif
-                                @endauth
-                                {{-- <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span> --}}
-                            </a>
-                            @auth
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#product">Our Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (auth()->user())
                                 <div class="dropdown">
-                                    <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-expanded="false">
                                         {{ auth()->user()->name }}
-                                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="{{ url('/home') }}">Home</a></li>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                            @csrf
-                                            <li><button class="dropdown-item btn" type="submit">Log Out</button></li>
-                                        </form>
-                                    </ul>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ url('/home') }}">Home</a>
+                                        <a class="dropdown-item" href="#">Logout</a>
+                                    </div>
                                 </div>
-                            @endauth
-                            @guest
-                                <a class="nav-icon position-relative text-decoration-none" href="{{ url('/home') }}">
-                                    <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                                    {{-- <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span> --}}
+                            @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/login') }}">login</a>
+                        </li>
+                        @endif
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="banner header-text">
+        <div class="owl-banner owl-carousel">
+            <div class="banner-item-01">
+                <div class="text-content">
+                    <h4 class="text-dark">Best Offer</h4>
+                    <h2>New Arrivals On Sale</h2>
+                </div>
+            </div>
+            <div class="banner-item-02">
+                <div class="text-content">
+                    <h4>Flash Deals</h4>
+                    <h2>Get your best products</h2>
+                </div>
+            </div>
+            <div class="banner-item-03">
+                <div class="text-content">
+                    <h4>Last Minute</h4>
+                    <h2>Grab last minute deals</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Ends Here -->
+
+    <div class="latest-products" id="product">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Latest Products</h2>
+                        <a href="{{ url('/product/all') }}">view all products <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+                @foreach ($product as $pro)
+                    <div class="col-md-4">
+                        <div class="product-item">
+                            <a href="#"><img src="{{ asset('storage/' . $pro->gambar) }}" alt=""></a>
+                            <div class="down-content">
+                                <a href="#">
+                                    <h4>{{ $pro->nama }}</h4>
                                 </a>
-                            @endguest
+                                <p>{{ $pro->keterangan }}</p>
+                                <ul class="stars">
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                </ul>
+                                <span>{{ 'Rp ' . number_format($pro->harga, 2, ',', '.') }}</span>
+                            </div>
                         </div>
                     </div>
-        
-                </div>
-            </nav>
-            <!-- Close Header -->
-        
-        
-        
-            @yield('main')
+                @endforeach
+            </div>
         </div>
-    
-        <!-- Start Footer -->
-        <footer class="bg-dark" id="tempaltemo_footer">
-    
-            <div class="w-100 bg-black py-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <p class="text-center text-light">
-                                Copyright &copy; 2023 Roosen
-                                </a>
-                            </p>
+    </div>
+
+    <div class="best-features">
+        <div class="container">
+            <div class="row" id="about">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>About Roosen</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="left-content">
+                        <h4>Looking for the best products?</h4>
+                        <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing"
+                                target="_parent">This template</a> is free to use for your business websites. However,
+                            you have no permission to redistribute the downloadable ZIP file on any template collection
+                            website. <a rel="nofollow" href="https://templatemo.com/contact">Contact us</a> for more
+                            info.</p>
+                        <ul class="featured-list">
+                            <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                            <li><a href="#">Consectetur an adipisicing elit</a></li>
+                            <li><a href="#">It aquecorporis nulla aspernatur</a></li>
+                            <li><a href="#">Corporis, omnis doloremque</a></li>
+                            <li><a href="#">Non cum id reprehenderit</a></li>
+                        </ul>
+                        <a href="{{ url('/register') }}" class="filled-button">Register</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="right-image">
+                        <img src="assets/images/feature-image.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inner-content">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite
+                                    author nulla.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#" class="filled-button">Purchase Now</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-    
-        </footer>
-        <!-- End Footer -->
+        </div>
     </div>
 
-    <!-- Start Script -->
-    <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/templatemo.js') }}"></script>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inner-content">
+                        <p>Copyright &copy; {{ date('Y') }} Roosen Co., Ltd.
+
+                            - Design: <a rel="nofollow noopener" target="_blank">Roosen</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+
+    <!-- Additional Scripts -->
     <script src="{{ asset('js/custom.js') }}"></script>
-    <!-- End Script -->
+    <script src="{{ asset('js/owl.js') }}"></script>
+    <script src="{{ asset('js/slick.js') }}"></script>
+    <script src="{{ asset('js/isotope.js') }}"></script>
+    <script src="{{ asset('js/accordions.js') }}"></script>
+
+
+    <script language="text/Javascript">
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t) { //declaring the array outside of the
+            if (!cleared[t.id]) { // function makes it static and global
+                cleared[t.id] = 1; // you could use true and false, but that's more typing
+                t.value = ''; // with more chance of typos
+                t.style.color = '#fff';
+            }
+        }
+    </script>
+
+
 </body>
 
 </html>
