@@ -1,6 +1,10 @@
 @extends('sbadmin.layout')
 
 @section('main')
+
+    <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('midtrans.client_key') }}"></script>
     <style>
         .ui-w-40 {
             width: 40px !important;
@@ -43,20 +47,7 @@
             text-align: center;
         }
 
-        .btn.btn-primary {
-            width: 100%;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 15px;
-            background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
-            border: none;
-            transition: 0.5s;
-            background-size: 200% auto;
-
-        }
-
+    
 
         .btn.btn.btn-primary:hover {
             background-position: right center;
@@ -112,7 +103,7 @@
                     {!! \Session::get('error') !!}
                 </div>
             @endif
-            <div class="card-body">
+            <div class="card-body" id="payment">
                 <div class="table-responsive">
                     <table class="table table-bordered m-0">
 
@@ -134,11 +125,25 @@
                                                 value="{{ $hasil->alamat_pembeli }}" readonly>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="d-flex flex-column">
+                                            <p class="text mb-1">Total Harga</p>
+                                            <input class="form-control mb-3" type="text"
+                                                value="{{ number_format($hasil->total_harga, 2, ',', '.') }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex flex-column">
+                                            <p class="text mb-1">Ongkir</p>
+                                            <input class="form-control mb-3" type="text"
+                                                value="{{ number_format($hasil->ongkir, 2, ',', '.') }}" readonly>
+                                        </div>
+                                    </div>
                                     <div class="col-6">
                                         <div class="d-flex flex-column">
                                             <p class="text mb-1">Total Pembayaran</p>
                                             <input class="form-control mb-3" type="text"
-                                                value="{{ number_format($hasil->total_harga, 2, ',', '.') }}" readonly>
+                                                value="{{ number_format($hasil->total_harga + $hasil->ongkir, 2, ',', '.') }}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -148,18 +153,21 @@
                                                 value="{{ $hasil->nohp }}" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="btn btn-primary mb-3">
-                                            <span class="ps-3">Pay $243</span>
-                                            <span class="fas fa-arrow-right"></span>
-                                        </div>
+                                    <div class="col-12 d-flex justify-content-center mb-2">
+                                            <button id="pay-button" class="btn btn-success shadow-lg btn-icon-split btn-lg text-center">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                                <span class="text">Bayar Sekarang</span>
+                                            </button>
                                     </div>
                                     <div class="col-12 d-flex justify-content-center">
-                                        <div class="btn btn-danger mb-3">
-                                            <form action="{{ route('payment.destroy',$hasil->id) }}" method="POST">
+                                        <div class="btn btn-danger mb-3 shadow-lg">
+                                            <form action="{{ route('payment.destroy', $hasil->id) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="ps-3 text-center text-light btn btn-danger" type="submit">Cancel Payment</button>
+                                                <button class="ps-3 text-center text-light btn btn-danger"
+                                                    type="submit">Cancel Payment</button>
                                             </form>
                                         </div>
                                     </div>
@@ -170,4 +178,30 @@
                     </table>
                 </div>
                 <!-- / Shopping cart table -->
+
+                <script type="text/javascript">
+                    // For example trigger on button clicked, or any time you need
+                    var payButton = document.getElementById('pay-button');
+                    payButton.addEventListener('click', function () {
+                      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+                      window.snap.pay('{{ $snapToken }}', {
+                        onSuccess: function(result){
+                          /* You may add your own implementation here */
+                          alert("payment success!"); console.log(result);
+                        },
+                        onPending: function(result){
+                          /* You may add your own implementation here */
+                          alert("wating your payment!"); console.log(result);
+                        },
+                        onError: function(result){
+                          /* You may add your own implementation here */
+                          alert("payment failed!"); console.log(result);
+                        },
+                        onClose: function(){
+                          /* You may add your own implementation here */
+                          alert('you closed the popup without finishing the payment');
+                        }
+                      })
+                    });
+                  </script>
             @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Courier;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -25,7 +27,10 @@ class CartController extends Controller
             $totalBiaya += $cartAll[$i]->product->harga * $cartAll[$i]->qty;
         }
 
-        return view('cart.index',compact('cart','totalBiaya','cartAll'));
+        $courier = Courier::pluck('title','code');
+        $provinces = Province::pluck('title','province_id');
+
+        return view('cart.index',compact('cart','totalBiaya','cartAll','courier','provinces'));
     }
 
     /**
@@ -54,7 +59,7 @@ class CartController extends Controller
             'qty' => $request->qty,
         ]);
      
-        return redirect("product/$request->product_id")->with('success', 'product ditambahkan ke keranjang');
+        return redirect("product/$request->product_id#product")->with('success', 'product ditambahkan ke keranjang');
     }
 
     /**

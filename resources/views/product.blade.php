@@ -48,7 +48,7 @@ https://templatemo.com/tm-546-sixteen-clothing
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <h2>Sixteen <em>Clothing</em></h2>
+                    <h2>ROOSEN</h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -143,6 +143,9 @@ https://templatemo.com/tm-546-sixteen-clothing
                         </div>
                     </form>
                 </div>
+                <div class="col-md-12 mb-2">
+                    {{ $product->links() }}
+                </div>
                 <div class="col-md-12">
                     <div class="filters-content">
                         <div class="row grid">
@@ -165,7 +168,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                                             </ul>
                                             <span>{{ 'Rp ' . number_format($pro->harga, 2, ',', '.') }}</span>
                                         </div>
-                                        <a href="{{ url('product/' . $pro->id) }}" class="btn btn-danger"><i
+                                        <a href="{{ url('product/' . $pro->id) }}#product" class="btn btn-danger"><i
                                                 class="fa-solid fa-eye"></i> View</a>
                                     </div>
                                 </div>

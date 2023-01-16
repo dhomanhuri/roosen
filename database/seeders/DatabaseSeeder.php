@@ -22,29 +22,18 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(100)->create();
 
-        Product::factory(100)->create();
+        // Product::factory(100)->create();
 
         // Cart::factory(100)->create();
+
+        $this->call(CouriersTableSeeder::class);
+        $this->call(LocationsTableSeeder::class);
 
         \App\Models\User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'role' => 'admin',
             'foto' => 'default.jpeg',
-            'password' => bcrypt('ugans123'),
-        ]);
-        \App\Models\User::create([
-            'name' => 'Muhammad Imam',
-            'email' => 'saitamasensei2005@gmail.com',
-            'role' => 'petani',
-            'foto' => 'userfoto/AGcwdOGuQ4RbkP7iW8zc2SWPGg0fNWQLgVimBqJQ.jpg',
-            'password' => bcrypt('ugans123'),
-        ]);
-        \App\Models\User::create([
-            'name' => 'Risqi Nur Ramadhan',
-            'email' => 'pembeli@gmail.com',
-            'role' => 'pembeli',
-            'foto' => 'userfoto/AGcwdOGuQ4RbkP7iW8zc2SWPGg0fNWQLgVimBqJQ.jpg',
             'password' => bcrypt('ugans123'),
         ]);
     }

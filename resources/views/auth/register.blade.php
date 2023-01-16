@@ -80,7 +80,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#product">Our Products</a>
+                            <a class="nav-link" href="{{ url('/product/all#product') }}">Our Products</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/index#about') }}">About Us</a>

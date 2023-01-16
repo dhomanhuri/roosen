@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
+     <!-- CSRF Token -->
+     <meta name="csrf-token" content="{{ csrf_token() }}">
+     
     <title>Roosen - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -88,6 +90,12 @@
                 <a class="nav-link collapsed" href="{{ url('/product') }}" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fab fa-product-hunt"></i>
                     <span>My Product</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/payment') }}" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-money-check-alt"></i>
+                    <span>Transaksi</span>
                 </a>
             </li>
             @endif
@@ -283,9 +291,11 @@
 
 
     </script>
-
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('sbadmin/vendor/jquery/jquery.min.js') }}"></script>
+    @if( Request::path() !== 'cart' )
+    <script src="{{ asset('sbadmin/vendor/jquery/jquery.min.js') }}"></script> 
+    @endif
+
     <script src="{{ asset('sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->

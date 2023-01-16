@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->integer('total_harga');
+            $table->integer('ongkir');
             $table->string('alamat_pembeli');
             $table->enum('status', ['lunas', 'belum lunas']);
             $table->string('nohp');

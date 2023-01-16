@@ -7,12 +7,13 @@ use App\Http\Controllers\PenyiramanController;
 use App\Http\Controllers\PhTanahController;
 use App\Http\Controllers\HasilProduksiController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\OngkirController;
 use App\Http\Controllers\PemupukanController;
 
 use App\Http\Controllers\PetaniController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-
+use App\Models\DaftarTransaksi;
 use Illuminate\Http\Response;
 use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Auth;
@@ -51,9 +52,10 @@ Route::group(['middleware'=>'auth'], function(){
     route::get('user/setting/{user}',[UserController::class,'setting']);
     route::post('user/update/{user}',[UserController::class,'settingUpdate'])->name('user.update');
     route::post('user/delete/{user}',[UserController::class,'deleteUser'])->name('user.delete');
-
+    
     // Petani Routes
     route::resource('/petani',PetaniController::class)->middleware('isadmin');
+    
 
     Route::group(['middleware'=>'ispetani'], function(){
 
@@ -69,13 +71,20 @@ Route::group(['middleware'=>'auth'], function(){
     Route::group(['middleware'=>'ispembeli'], function(){
         // Cart Routes
         route::resource('/cart',CartController::class);
-        route::resource('/payment',DaftarTransaksiController::class);
+        route::post('/after-payment',[DaftarTransaksiController::class,'afterPayment']);
+
+
+        // Ongkir routes
+        route::get('/ongkir',[OngkirController::class,'index']);
+        route::get('/cities/{id}',[OngkirController::class,'getCities']);
+        route::post('/ongkir',[OngkirController::class,'check_ongkir']);
+
     });
     
 });
 // Product Routes
 route::resource('/product',ProductController::class);
 route::get('product/dashboard/search',[ProductController::class,'searchDashboard'])->name('product.search.dashboard');
-
+route::resource('/payment',DaftarTransaksiController::class);
 
 

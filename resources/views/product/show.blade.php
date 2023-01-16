@@ -118,7 +118,7 @@ https://templatemo.com/tm-546-sixteen-clothing
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <h2>Sixteen <em>Clothing</em></h2>
+                    <h2>ROOSEN</h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,7 +132,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#product">Our Products</a>
+                            <a class="nav-link" href="{{ url('/product/all') }}#product">Our Products</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/index#about') }}">About Us</a>
@@ -191,7 +191,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     <!-- Page Content -->
     <div class="container mt-5 mb-5">
         <div class="row d-flex justify-content-center">
-            <div class="col-lg-12">
+            <div class="col-lg-12" id="product">
                 @if (\Session::has('success'))
                     <div class="alert alert-success">
                         {!! \Session::get('success') !!}
